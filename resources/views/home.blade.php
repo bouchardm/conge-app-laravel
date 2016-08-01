@@ -5,10 +5,62 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Demande de congé</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/demande') }}">
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('raison') ? ' has-error' : '' }}">
+                            <label for="raison" class="col-md-4 control-label">Raison</label>
+
+                            <div class="col-md-6">
+                                <input id="raison" type="text" class="form-control" name="raison" value="{{ old('raison') }}" autofocus>
+
+                                @if ($errors->has('raison'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('raison') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('debut') ? ' has-error' : '' }}">
+                            <label for="debut" class="col-md-4 control-label">Date de début</label>
+
+                            <div class="col-md-6">
+                                <input id="debut" type="date" class="form-control" name="debut" value="{{ old('debut') }}" autofocus>
+
+                                @if ($errors->has('debut'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('debut') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('fin') ? ' has-error' : '' }}">
+                            <label for="fin" class="col-md-4 control-label">Date de fin</label>
+
+                            <div class="col-md-6">
+                                <input id="fin" type="date" class="form-control" name="fin" value="{{ old('fin') }}" autofocus>
+
+                                @if ($errors->has('fin'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('fin') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Envoyer
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
