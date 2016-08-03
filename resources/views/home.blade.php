@@ -8,6 +8,12 @@
                 <div class="panel-heading">Demande de congé</div>
 
                 <div class="panel-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/demande') }}">
                         {{ csrf_field() }}
 
