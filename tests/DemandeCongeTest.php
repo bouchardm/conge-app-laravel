@@ -32,11 +32,8 @@ class DemandeCongeTest extends TestCase
 
     public function testJeNePasFaireUneDemandeVide()
     {
-        $this->actingAs($this->user);
-        
-        $this->visit('/home')
-            ->press('Envoyer')
-            ->dontSee('Demande envoyé!');
+        $demandeRequest = new \App\Http\Requests\DemandeRequest();
+        $this->assertFalse(Validator::make([], $demandeRequest->rules())->passes());
     }
 
     protected function setUp()
