@@ -20,3 +20,6 @@ php artisan migrate
 # ide-helper
 php artisan clear-compiled
 php artisan ide-helper:generate
+
+# install checkup
+./vendor/bin/phpunit
