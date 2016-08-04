@@ -13,12 +13,6 @@ class ListeDemandesTest extends TestCase
     /** @var  User */
     protected $user;
 
-    public function testJePeuxVoirLaPageListeDesDemandes()
-    {
-        $this->actingAs($this->user);
-        $this->visit('/demandes')->see('Liste de demande');
-    }
-
     public function testJePeuxVoirLaListeDesDemandes()
     {
         $this->actingAs($this->user);

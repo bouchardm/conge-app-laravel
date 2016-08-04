@@ -6,21 +6,27 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Liste de demande</div>
-
                 <div class="panel-body">
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @endif
-
-                    <ul>
-                        @foreach ($demandes as $demande)
-                            <li>
-                                {{ $demande->raison }}
-                            </li>
-                        @endforeach
-                    </ul>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Raison</th>
+                                <th>Debut</th>
+                                <th>Fin</th>
+                                <th>Approuvé</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($demandes as $demande)
+                                <tr>
+                                    <td class="raison">{{ $demande->raison }}</td>
+                                    <td>{{ $demande->debut }}</td>
+                                    <td>{{ $demande->fin }}</td>
+                                    <td>{{ $demande->approuvé ? 'Oui' : 'Non' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
