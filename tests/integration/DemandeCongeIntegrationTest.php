@@ -31,6 +31,8 @@ class DemandeCongeIntegrationTest extends TestCase
             ->select('sans-solde', 'type')
             ->press('Envoyer')
             ->see('Demande envoyé!');
+
+        $this->seeInDatabase('demandes', ['raison' => 'Trop bu']);
     }
 
     protected function setUp()

@@ -18,4 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/demandes', 'HomeController@demandes');
 Route::post('/demande', 'HomeController@saveDemande');
