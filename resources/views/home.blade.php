@@ -59,6 +59,37 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label for="type" class="col-md-4 control-label">Type de congé</label>
+
+                            <div class="col-md-6">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="type" id="sans-solde" value="sans-solde" {{ old('type') == 'sans-solde' ? 'checked' : '' }}>
+                                        Sans solde
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="type" id="conge-paye" value="conge-paye" {{ old('type') == 'conge-paye' ? 'checked' : '' }}>
+                                        Congé payé
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="type" id="ctf" value="ctf" {{ old('type') == 'ctf' ? 'checked' : '' }}>
+                                        CTF
+                                    </label>
+                                </div>
+
+                                @if ($errors->has('type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

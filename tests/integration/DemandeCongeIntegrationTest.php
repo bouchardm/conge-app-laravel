@@ -5,8 +5,10 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class DemandeCongeTest extends TestCase
+class DemandeCongeIntegrationTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /** @var User */
     protected $user;
 
@@ -15,7 +17,7 @@ class DemandeCongeTest extends TestCase
         $this->actingAs($this->user);
 
         $this->visit('/home')
-             ->see('Demande de congé');
+            ->see('Demande de congé');
     }
 
     public function testJePeuxFaireUneDemandeDeCongeValide()
@@ -23,17 +25,12 @@ class DemandeCongeTest extends TestCase
         $this->actingAs($this->user);
 
         $this->visit('/home')
-             ->type('Trop bu', 'raison')
-             ->type('03-03-2016', 'debut')
-             ->type('04-03-2016', 'fin')
-             ->press('Envoyer')
-             ->see('Demande envoyé!');
-    }
-
-    public function testJeNePasFaireUneDemandeVide()
-    {
-        $demandeRequest = new \App\Http\Requests\DemandeRequest();
-        $this->assertFalse(Validator::make([], $demandeRequest->rules())->passes());
+            ->type('Trop bu', 'raison')
+            ->type('03-03-2016', 'debut')
+            ->type('04-03-2016', 'fin')
+            ->select('sans-solde', 'type')
+            ->press('Envoyer')
+            ->see('Demande envoyé!');
     }
 
     protected function setUp()
@@ -41,6 +38,4 @@ class DemandeCongeTest extends TestCase
         parent::setUp();
         $this->user = factory(User::class)->create();
     }
-
-
 }

@@ -27,6 +27,7 @@ class DemandeRequest extends Request
             'raison' => 'required',
             'debut' => 'required|date',
             'fin' => 'required|date',
+            'type' => 'required',
         ];
     }
 }
