@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Demande;
 
 use App\Http\Requests\Request;
 
-class ListDemandesRequest extends Request
+class UpdateDemandeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Demande;
 
 use App\Http\Requests\Request;
 
-class UpdateDemandeRequest extends Request
+class PostDemandeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateDemandeRequest extends Request
      */
     public function authorize()
     {
-        return $this->user()->admin;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateDemandeRequest extends Request
     public function rules()
     {
         return [
-            //
+            'raison' => 'required',
+            'debut' => 'required|date',
+            'fin' => 'required|date',
+            'type' => 'required',
         ];
     }
 }
