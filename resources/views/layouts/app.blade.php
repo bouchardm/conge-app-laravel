@@ -36,7 +36,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-left">
-                    @if (Auth::user())
+                    @if (Auth::user() && Auth::user()->admin)
                         <li><a href="{{ url('demandes') }}">Liste des demandes</a></li>
                     @endif
                 </ul>
