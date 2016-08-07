@@ -20,7 +20,7 @@ class DemandeController extends Controller
     {
         Demande::create($request->only('raison', 'debut', 'fin', 'type'));
 
-        return redirect('home')->with('success', 'Demande envoyé!');
+        return redirect('demande')->with('success', 'Demande envoyé!');
     }
 
     public function updateDemande(UpdateDemandeRequest $request, $id)

@@ -12,12 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::user()) {
+        return redirect('/demande');
+    }
+    return view('auth.login');
 });
+Route::get('/demande', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
 
 Route::get('/demandes', 'DemandeController@demandes');
 Route::post('/demande', 'DemandeController@saveDemande');

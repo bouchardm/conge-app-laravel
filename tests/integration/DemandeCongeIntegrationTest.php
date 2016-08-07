@@ -17,7 +17,7 @@ class DemandeCongeIntegrationTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->visit('/home')
+        $this->visit('/demande')
             ->see('Demande de congé');
     }
 
@@ -25,7 +25,7 @@ class DemandeCongeIntegrationTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $this->visit('/home')
+        $this->visit('/demande')
             ->type('Trop bu', 'raison')
             ->type('03-03-2016', 'debut')
             ->type('04-03-2016', 'fin')
