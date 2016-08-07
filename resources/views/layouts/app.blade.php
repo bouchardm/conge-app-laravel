@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Congé!</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Congé!
                 </a>
             </div>
 
@@ -35,6 +35,11 @@
                     &nbsp;
                 </ul>
 
+                <ul class="nav navbar-nav navbar-left">
+                    @if (Auth::user())
+                        <li><a href="{{ url('demandes') }}">Liste des demandes</a></li>
+                    @endif
+                </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->

@@ -25,6 +25,8 @@ class ListeDemandesTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = factory(User::class)->create([
+            'admin' => true
+        ]);
     }
 }

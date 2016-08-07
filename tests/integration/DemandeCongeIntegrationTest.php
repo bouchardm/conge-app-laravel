@@ -1,5 +1,6 @@
 <?php
 
+use App\Demande;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -33,6 +34,20 @@ class DemandeCongeIntegrationTest extends TestCase
             ->see('Demande envoyé!');
 
         $this->seeInDatabase('demandes', ['raison' => 'Trop bu']);
+    }
+
+    public function testUnAdminPeutApprouveUneDemande()
+    {
+        $this->user->admin = true;
+        $this->actingAs($this->user);
+
+        factory(Demande::class)->create([
+            'raison' => 'une bonne raison'
+        ]);
+        $this->visit('/demandes')
+             ->press('Oui')
+             ->see('Demande mis à jour')
+             ->seeInDatabase('demandes', ['raison' => 'une bonne raison', 'approuve' => true]);
     }
 
     protected function setUp()

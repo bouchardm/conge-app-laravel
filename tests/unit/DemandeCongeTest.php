@@ -6,9 +6,11 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DemandeCongeTest extends TestCase
 {
-    public function testJeNePasFaireUneDemandeVide()
+    use WithoutMiddleware;
+
+    public function testJeNePeuxPasFaireUneDemandeVide()
     {
-        $demandeRequest = new \App\Http\Requests\DemandeRequest();
+        $demandeRequest = new \App\Http\Requests\PostDemandeRequest();
         $this->assertFalse(Validator::make([], $demandeRequest->rules())->passes());
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class DemandeRequest extends Request
+class UpdateDemandeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DemandeRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->admin;
     }
 
     /**
@@ -24,10 +24,7 @@ class DemandeRequest extends Request
     public function rules()
     {
         return [
-            'raison' => 'required',
-            'debut' => 'required|date',
-            'fin' => 'required|date',
-            'type' => 'required',
+            //
         ];
     }
 }

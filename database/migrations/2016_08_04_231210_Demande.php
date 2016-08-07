@@ -19,7 +19,7 @@ class Demande extends Migration
             $table->date('debut');
             $table->date('fin');
             $table->string('type');
-            $table->boolean('approuve')->default(false);
+            $table->boolean('approuve')->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -7,6 +7,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Liste de demande</div>
                 <div class="panel-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -22,11 +27,29 @@
                                     <td class="raison">{{ $demande->raison }}</td>
                                     <td>{{ $demande->debut }}</td>
                                     <td>{{ $demande->fin }}</td>
-                                    <td>{{ $demande->approuvé ? 'Oui' : 'Non' }}</td>
+                                    <td>
+                                        @if (is_null($demande->approuve))
+                                            <form class="inline" action="{{ url("/demande/$demande->id") }}" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="approuve" value="true">
+                                                <button class="btn btn-success">Oui</button>
+                                            </form>
+                                            <form class="inline" action="{{ url("/demande/$demande->id") }}" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="approuve" value="false">
+                                                <button class="btn btn-danger">Non</button>
+                                            </form>
+                                        @else
+                                            {{ $demande->approuve ? 'Oui' : 'Non' }}
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        {{ $demandes->links() }}
+                    </div>
                 </div>
             </div>
         </div>
