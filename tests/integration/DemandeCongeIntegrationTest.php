@@ -36,6 +36,21 @@ class DemandeCongeIntegrationTest extends TestCase
         $this->seeInDatabase('demandes', ['raison' => 'Trop bu']);
     }
 
+    public function testUnAdminPeutVoirLesDemandesDeConge()
+    {
+        $this->user->admin = true;
+        $this->actingAs($this->user);
+
+        factory(Demande::class)->create([
+            'raison' => 'une bonne raison',
+            'type' => 'sans-solde',
+        ]);
+
+        $this->visit('/demandes')
+             ->see('une bonne raison')
+             ->see('Sans solde');
+    }
+
     public function testUnAdminPeutApprouveUneDemande()
     {
         $this->user->admin = true;

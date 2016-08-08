@@ -18,6 +18,7 @@
                                 <th>Raison</th>
                                 <th>Debut</th>
                                 <th>Fin</th>
+                                <th>Type</th>
                                 <th>Approuvé</th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                                     <td class="raison">{{ $demande->raison }}</td>
                                     <td>{{ $demande->debut }}</td>
                                     <td>{{ $demande->fin }}</td>
+                                    <td>{{ trans('demande.type.' . $demande->type) }}</td>
                                     <td>
                                         @if (is_null($demande->approuve))
                                             <form class="inline" action="{{ url("/demande/$demande->id") }}" method="post">
