@@ -20,4 +20,12 @@ class HomeFlowIntegrationTest extends TestCase
 
         $this->visit('/')->see('Demande de congé');
     }
+
+    public function testUnUtilisateurNormalNePeuxPasVoirLaListeDesDemandes()
+    {
+        $user = factory(\App\User::class)->create();
+        $this->actingAs($user);
+
+        $this->get('/demandes')->assertResponseStatus(403);
+    }
 }
