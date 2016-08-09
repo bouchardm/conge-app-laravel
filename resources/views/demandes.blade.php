@@ -12,6 +12,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    <a href="{{ url("/demandes?traite=1") }}">Demande traité</a>
                     <table class="table table-hover">
                         <thead>
                             <tr>

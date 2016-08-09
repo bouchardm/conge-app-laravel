@@ -34,7 +34,13 @@ class DemandeController extends Controller
 
     public function demandes(ListDemandesRequest $request)
     {
-        return view('demandes')
-            ->with('demandes', Demande::where([])->orderBy('created_at', 'desc')->paginate(10));
+        $demandes = Demande::latest();
+        if ($request->has('traite')) {
+            $demandes->whereNotNull('approuve');
+        } else {
+            $demandes->whereNull('approuve');
+        }
+
+        return view('demandes')->with('demandes', $demandes->paginate(10));
     }
 }

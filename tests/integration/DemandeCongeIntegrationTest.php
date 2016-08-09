@@ -13,6 +13,9 @@ class DemandeCongeIntegrationTest extends TestCase
     /** @var User */
     protected $user;
 
+    /** @var User */
+    protected $admin;
+
     public function testConnexion()
     {
         $this->actingAs($this->user);
@@ -38,8 +41,7 @@ class DemandeCongeIntegrationTest extends TestCase
 
     public function testUnAdminPeutVoirLesDemandesDeConge()
     {
-        $this->user->admin = true;
-        $this->actingAs($this->user);
+        $this->actingAs($this->admin);
 
         factory(Demande::class)->create([
             'raison' => 'une bonne raison',
@@ -53,8 +55,7 @@ class DemandeCongeIntegrationTest extends TestCase
 
     public function testUnAdminPeutApprouveUneDemande()
     {
-        $this->user->admin = true;
-        $this->actingAs($this->user);
+        $this->actingAs($this->admin);
 
         factory(Demande::class)->create([
             'raison' => 'une bonne raison'
@@ -65,9 +66,37 @@ class DemandeCongeIntegrationTest extends TestCase
              ->seeInDatabase('demandes', ['raison' => 'une bonne raison', 'approuve' => true]);
     }
 
+    public function testUnAdminNeVoisPasLesDemandesTraiteParDefault()
+    {
+        $this->actingAs($this->admin);
+
+        factory(Demande::class)->create([
+            'raison' => 'une mauvaise raison',
+            'approuve' => false,
+        ]);
+        $this->visit('/demandes')
+             ->dontSee('une mauvaise raison');
+    }
+
+    public function testUnAdminPeuxVoirLesDemandesTraite()
+    {
+        $this->actingAs($this->admin);
+        factory(Demande::class)->create([
+            'raison' => 'une mauvaise raison',
+            'approuve' => false,
+        ]);
+        
+        $this->visit('/demandes')
+             ->click('Demande traité')
+             ->see('une mauvaise raison');
+    }
+
     protected function setUp()
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
+        $this->admin = factory(User::class)->create([
+            'admin' => true
+        ]);
     }
 }
